@@ -22,7 +22,7 @@ public class Course {
                             CascadeType.MERGE,
                             CascadeType.PERSIST,
                             CascadeType.REFRESH} )
-    @JoinTable(name = "instructor_id")
+    @JoinColumn(name = "instructor_id")
     private Instructor instructor;
 
     public Course() {

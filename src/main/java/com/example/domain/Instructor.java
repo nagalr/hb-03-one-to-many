@@ -1,9 +1,9 @@
-    package com.example.domain;
+package com.example.domain;
 
 import javax.persistence.*;
 import java.util.List;
 
-    /**
+/**
  * Created by ronnen on 19-Jan-2021
  */
 
@@ -39,10 +39,10 @@ public class Instructor {
     private InstructorDetail instructorDetail;
 
     @OneToMany(mappedBy = "instructor",
-                cascade = {CascadeType.DETACH,
-                            CascadeType.MERGE,
-                            CascadeType.PERSIST,
-                            CascadeType.REFRESH} )
+            cascade = {CascadeType.DETACH,
+                    CascadeType.MERGE,
+                    CascadeType.PERSIST,
+                    CascadeType.REFRESH})
     private List<Course> courses;
 
     public Instructor() {
@@ -54,15 +54,21 @@ public class Instructor {
         this.email = email;
     }
 
-        public List<Course> getCourses() {
-            return courses;
-        }
+    // create bidi-relation
+    public void add(Course theCourse) {
+        this.courses.add(theCourse);
+        theCourse.setInstructor(this);
+    }
 
-        public void setCourses(List<Course> courses) {
-            this.courses = courses;
-        }
+    public List<Course> getCourses() {
+        return courses;
+    }
 
-        public Long getId() {
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    public Long getId() {
         return id;
     }
 
