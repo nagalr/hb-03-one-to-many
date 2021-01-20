@@ -46,6 +46,9 @@ public class App2 {
 
             session.save(course1);
 
+            // will not delete the associated instructor
+//            session.delete(course1);
+
             // commit the transaction
             session.getTransaction().commit();
 
