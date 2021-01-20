@@ -1,5 +1,6 @@
 package com.example.data;
 
+import com.example.domain.Course;
 import com.example.domain.Instructor;
 import com.example.domain.InstructorDetail;
 import org.hibernate.SessionFactory;
@@ -39,7 +40,7 @@ public class HibernateUtil {
 
             Properties properties = new Properties();
             properties.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-            properties.put(Environment.URL, "jdbc:mysql://localhost:8889/hb-01-one-to-one-uni");
+            properties.put(Environment.URL, "jdbc:mysql://localhost:8889/hb-03-one-to-many");
             properties.put(Environment.USER, "root");
             properties.put(Environment.PASS, "root");
             properties.put(Environment.FORMAT_SQL, "false");
@@ -53,6 +54,7 @@ public class HibernateUtil {
                     .setProperties(properties)
                     .addAnnotatedClass(Instructor.class)
                     .addAnnotatedClass(InstructorDetail.class)
+                    .addAnnotatedClass(Course.class)
                     .buildSessionFactory();
 
         } catch (Throwable ex) {

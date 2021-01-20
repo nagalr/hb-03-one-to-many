@@ -13,7 +13,7 @@
 
         <!-- 'show_sql' set true to check sql statements on console else set to false -->
         <property name="show_sql">true</property>
-        <property name="format_sql">true</property>
+        <property name="format_sql">false</property>
 
         <!-- use 'create' to Create tables on application startup else use 'update'-->
         <property name="hbm2ddl.auto">create</property>
@@ -25,6 +25,7 @@
         <!-- Domain Model classes to be mapped -->
         <mapping class="com.example.domain.Instructor" />
         <mapping class="com.example.domain.InstructorDetail" />
+        <mapping class="com.example.domain.Course" />
 
     </session-factory>
 </hibernate-configuration>

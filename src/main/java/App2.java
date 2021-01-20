@@ -42,16 +42,13 @@ public class App2 {
             session.getTransaction().commit();
 
             // close the session that read a student from the DB
-            session.close();
+//            session.close();
 
         } catch (Exception e) {
             System.out.println("[ERROR] error while opening the session: " + e);
         }
 
-        try {
-
-            // try-with-resources to close the session at the end
-            Session session = HibernateUtil.getSessionFactory().openSession();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()){
 
             // start a transaction
             session.beginTransaction();
@@ -83,7 +80,7 @@ public class App2 {
             // commit the transaction
             session.getTransaction().commit();
 
-            session.close();
+//            session.close();
 
         } catch (Exception e) {
             System.out.println("[ERROR] error while opening the session: " + e);
