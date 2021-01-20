@@ -1,6 +1,7 @@
 package com.example.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "Instructor")
+@Table(name = "instructor")
 public class Instructor {
 
     /*
@@ -43,6 +44,7 @@ public class Instructor {
                     CascadeType.MERGE,
                     CascadeType.PERSIST,
                     CascadeType.REFRESH})
+    @Column(name = "courses")
     private List<Course> courses;
 
     public Instructor() {
@@ -56,7 +58,11 @@ public class Instructor {
 
     // create bidi-relation
     public void add(Course theCourse) {
-        this.courses.add(theCourse);
+        if (courses == null) {
+            courses = new ArrayList<>();
+        }
+
+        this.courses. add(theCourse);
         theCourse.setInstructor(this);
     }
 
