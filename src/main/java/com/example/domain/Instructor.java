@@ -1,8 +1,9 @@
     package com.example.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
-/**
+    /**
  * Created by ronnen on 19-Jan-2021
  */
 
@@ -37,6 +38,13 @@ public class Instructor {
     @JoinColumn(name = "instructor_detail_id")
     private InstructorDetail instructorDetail;
 
+    @OneToMany(mappedBy = "instructor",
+                cascade = {CascadeType.DETACH,
+                            CascadeType.MERGE,
+                            CascadeType.PERSIST,
+                            CascadeType.REFRESH} )
+    private List<Course> courses;
+
     public Instructor() {
     }
 
@@ -46,7 +54,15 @@ public class Instructor {
         this.email = email;
     }
 
-    public Long getId() {
+        public List<Course> getCourses() {
+            return courses;
+        }
+
+        public void setCourses(List<Course> courses) {
+            this.courses = courses;
+        }
+
+        public Long getId() {
         return id;
     }
 
