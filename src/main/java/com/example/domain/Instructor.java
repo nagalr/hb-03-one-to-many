@@ -56,12 +56,11 @@ public class Instructor {
         this.email = email;
     }
 
-    // create bidi-relation
+    // create bidi-relation (convenient method)
     public void add(Course theCourse) {
         if (courses == null) {
             courses = new ArrayList<>();
         }
-
         this.courses. add(theCourse);
         theCourse.setInstructor(this);
     }
@@ -122,6 +121,7 @@ public class Instructor {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", instructorDetail=" + instructorDetail +
+                ", courses=" + courses +
                 '}';
     }
 }

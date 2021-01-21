@@ -70,9 +70,30 @@ public class App2 {
              save the courses
              start a transaction
             */
+            Long theId = 1L;
+            Long theId2 = 2L;
+            Instructor inst = session.get(Instructor.class, theId);
+            Instructor inst2 = session.get(Instructor.class, theId2);
 
+            System.out.println("Before Instructor: " + inst);
+            System.out.println("Before Instructor: " + inst2);
+
+            Course course1 = new Course("Physics");
+            Course course2 = new Course("Biology");
+            Course course3 = new Course("Chemistry");
+
+            inst.add(course1);
+            inst2.add(course2);
+            inst2.add(course3);
+
+            System.out.println("After Instructor: " + inst);
+            System.out.println("After Instructor: " + inst2);
 
             session.beginTransaction();
+
+            session.save(course1);
+            session.save(course2);
+            session.save(course3);
 
             // commit the transaction
             session.getTransaction().commit();
