@@ -112,9 +112,14 @@ public class App2 {
 
             System.out.println("Instructor Courses: ");
 
+            session.beginTransaction();
+
             for (Course item : courses) {
                 System.out.println(item);
+                session.delete(item);
             }
+
+            session.getTransaction().commit();
 
         } catch (Exception e) {
             System.out.println("[ERROR] error while opening the session: " + e);
