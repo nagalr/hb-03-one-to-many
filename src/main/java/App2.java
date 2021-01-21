@@ -59,6 +59,27 @@ public class App2 {
         } catch (Exception e) {
             System.out.println("[ERROR] error while opening the session: " + e);
         }
+
+        // try-with-resources to close the session at the end
+        // second try-block to test DB interactions
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+            /*
+             retrieve instructor objects from the DB
+             create some courses and add them to the instructor
+             save the courses
+             start a transaction
+            */
+
+
+            session.beginTransaction();
+
+            // commit the transaction
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            System.out.println("[ERROR] error while opening the session: " + e);
+        }
     }
 }
 
