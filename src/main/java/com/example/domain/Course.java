@@ -28,9 +28,8 @@ public class Course {
     public Course() {
     }
 
-    public Course(String title, Instructor instructor) {
+    public Course(String title) {
         this.title = title;
-        this.instructor = instructor;
     }
 
     public Long getId() {
@@ -62,7 +61,6 @@ public class Course {
         return "Course{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", instructor=" + instructor +
                 '}';
     }
 }

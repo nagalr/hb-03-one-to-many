@@ -1,6 +1,7 @@
 import com.example.data.HibernateUtil;
 import com.example.domain.Course;
 import com.example.domain.Instructor;
+import com.example.domain.InstructorDetail;
 import org.hibernate.Session;
 
 /**
@@ -22,16 +23,19 @@ public class App2 {
             System.out.println("instructor1: " + instructor);
 
             Instructor instructor2 =
-                    new Instructor("Mark", "Jane", "mark@gmail.com");
+                    new Instructor("Mark",
+                                    "Jane",
+                                        "mark@gmail.com");
 
-            System.out.println("instructor2: " + instructor2);
+            InstructorDetail instructorDetail =
+                    new InstructorDetail("https://youtube.com/hello",
+                                                "Video Games");
 
-            Course course1 =
-                    new Course();
+            // creates bidi-link between the objects
+            instructor.setInstructorDetail(instructorDetail);
+            instructorDetail.setInstructor(instructor);
 
-            System.out.println("course: " + course1);
-
-            course1.setTitle("Math");
+            Course course1 = new Course("Math");
 
             instructor.add(course1);
 
