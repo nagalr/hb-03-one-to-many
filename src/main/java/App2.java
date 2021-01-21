@@ -4,6 +4,8 @@ import com.example.domain.Instructor;
 import com.example.domain.InstructorDetail;
 import org.hibernate.Session;
 
+import java.util.List;
+
 /**
  * Created by ronnen on 18-Jan-2021
  */
@@ -23,13 +25,11 @@ public class App2 {
             System.out.println("instructor1: " + instructor);
 
             Instructor instructor2 =
-                    new Instructor("Mark",
-                                    "Jane",
-                                        "mark@gmail.com");
+                    new Instructor("Mark", "Jane", "mark@gmail.com");
 
             InstructorDetail instructorDetail =
                     new InstructorDetail("https://youtube.com/hello",
-                                                "Video Games");
+                            "Video Games");
 
             // creates bidi-link between the objects
             instructor.setInstructorDetail(instructorDetail);
@@ -75,9 +75,6 @@ public class App2 {
             Instructor inst = session.get(Instructor.class, theId);
             Instructor inst2 = session.get(Instructor.class, theId2);
 
-            System.out.println("Before Instructor: " + inst);
-            System.out.println("Before Instructor: " + inst2);
-
             Course course1 = new Course("Physics");
             Course course2 = new Course("Biology");
             Course course3 = new Course("Chemistry");
@@ -85,9 +82,6 @@ public class App2 {
             inst.add(course1);
             inst2.add(course2);
             inst2.add(course3);
-
-            System.out.println("After Instructor: " + inst);
-            System.out.println("After Instructor: " + inst2);
 
             session.beginTransaction();
 
@@ -97,6 +91,30 @@ public class App2 {
 
             // commit the transaction
             session.getTransaction().commit();
+
+        } catch (Exception e) {
+            System.out.println("[ERROR] error while opening the session: " + e);
+        }
+
+        // try-with-resources to close the session at the end
+        // third try-block to test retrieval from the DB and display
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+            // retrieve instructor from the DB with id 1L
+            Long theId = 1L;
+            Instructor instructor = session.get(Instructor.class, theId);
+
+            // display the retrieved instructor and its courses
+            System.out.println("Found Instructor: " + instructor);
+
+            // retrieves the instructor courses, display them
+            List<Course> courses = instructor.getCourses();
+
+            System.out.println("Instructor Courses: ");
+
+            for (Course item : courses) {
+                System.out.println(item);
+            }
 
         } catch (Exception e) {
             System.out.println("[ERROR] error while opening the session: " + e);
